@@ -1,5 +1,5 @@
 var helicopterIMG, helicopterSprite, packageSprite,packageIMG;
-var packageBody,ground
+var packageBody,ground;
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -32,7 +32,6 @@ function setup() {
 
 	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.4, isStatic:true});
 	World.add(world, packageBody);
-	//Matter.Body.translate(Body, translation)
 
 	//Create a Ground
 	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
@@ -59,9 +58,7 @@ function setup() {
  	boxRightBody = Bodies.rectangle(boxPosition+200-20 , boxY, 20,100 , {isStatic:true} );
  	World.add(world, boxRightBody);
 
-
 	Engine.run(engine);
-  
 }
 
 
@@ -74,17 +71,16 @@ function draw() {
   packageSprite.x= packageBody.position.x 
   packageSprite.y= packageBody.position.y 
 
-  packageSprite.x = helicopterSprite.x;
-  //Matter.Body.translate(Body, translation)
-
   if(keyCode === RIGHT_ARROW)
   {
     helicopterSprite.x=helicopterSprite.x+20;
+	Matter.Body.translate(packageBody, {x:20, y:0})
   }
 
   if(keyCode === LEFT_ARROW)
   {
     helicopterSprite.x=helicopterSprite.x-20;
+	Matter.Body.translate(packageBody, {x:-20, y:0})
   }
 
   if(keyCode === DOWN_ARROW)
